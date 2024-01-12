@@ -9,15 +9,13 @@ namespace BeehiveManagementSystem
     class HoneyManufacturer : Bee
     {
         public override float CostPerShift { get { return 1.7f; } }
+        public const float NECTAR_PROCESSED_PER_SHIFT = 33.15f;
 
         protected override void DoJob()
         {
-
+            HoneyVault.ConvertNectarToHoney(NECTAR_PROCESSED_PER_SHIFT);
         }
 
-        public HoneyManufacturer() : base("Honey Manufacturer")
-        {
-
-        }
+        public HoneyManufacturer() : base("Honey Manufacturer") { }
     }
 }

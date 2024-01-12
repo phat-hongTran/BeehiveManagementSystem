@@ -14,9 +14,9 @@ namespace BeehiveManagementSystem
 
         protected virtual void DoJob() { }
 
-        public void WorkTheNextShift(float honeyConsumed)
+        public void WorkTheNextShift()
         {
-            if (HoneyVault.ConsumeHoney(honeyConsumed))
+            if (HoneyVault.ConsumeHoney(CostPerShift))
             {
                 DoJob();
             }

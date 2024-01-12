@@ -12,19 +12,13 @@ namespace BeehiveManagementSystem
         { 
             get 
             {
-                string report = "";
-                report += "Vault report:";
-                report += "\n";
-                report += $"{honey} units of honey";
-                report += "\n";
-                report += $"{nectar} units of nectar";
-                if (honey < LOW_LEVEL_WARNING)
-                {
-                    report += "\n";
-                    report += "LOW HONEY - ADD A HONEY MANUFACTURER";
-                }
-                report += "\n";
-                return report;
+                string status = $"{honey:0.0} units of honey\n" + $"{nectar:0.0} units of nectar";
+                string warnings = "";
+                if (honey < LOW_LEVEL_WARNING) warnings +=
+                "\nLOW HONEY - ADD A HONEY MANUFACTURER";
+                if (nectar < LOW_LEVEL_WARNING) warnings +=
+                "\nLOW NECTAR - ADD A NECTAR COLLECTOR";
+                return status + warnings;
             } 
         }
 
@@ -44,13 +38,10 @@ namespace BeehiveManagementSystem
 
         public static void ConvertNectarToHoney(float amount)
         {
-            if (amount > nectar)
-            {
-                amount = nectar;
-            }
-
-            nectar -= amount;
-            honey += amount * NECTAR_CONVERSION_RATIO;
+            float nectarToConvert = amount;
+            if (nectarToConvert > nectar) nectarToConvert = nectar;
+            nectar -= nectarToConvert;
+            honey += nectarToConvert * NECTAR_CONVERSION_RATIO;
         }
 
         public static bool ConsumeHoney(float amount)
