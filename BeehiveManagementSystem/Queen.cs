@@ -17,12 +17,12 @@ namespace BeehiveManagementSystem
         private float eggs=0;
         private float unassignedWorkers=3;
 
-        private Bee[] workers = new Bee[0];
+        private IWorker[] workers = new Bee[0];
 
         protected override void DoJob()
         {
             eggs += EGGS_PER_SHIFT;
-            foreach (Bee worker in workers)
+            foreach (IWorker worker in workers)
             {
                 worker.WorkTheNextShift();
             }
@@ -59,7 +59,7 @@ namespace BeehiveManagementSystem
         private string WorkerStatus(string job)
         {
             int count = 0;
-            foreach (Bee worker in workers)
+            foreach (IWorker worker in workers)
                 if (worker.Job == job) count++;
             string s = "s";
             if (count == 1) s = "";
@@ -78,7 +78,7 @@ namespace BeehiveManagementSystem
         /// Expand the workers array by one slot and add a Bee reference.
         /// </summary>
         /// <param name="worker">Worker to add to the workers array.</param>
-        private void AddWorker(Bee worker)
+        private void AddWorker(IWorker worker)
         {
             if (unassignedWorkers >= 1)
             {
